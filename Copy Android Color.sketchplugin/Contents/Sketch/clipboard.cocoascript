@@ -1,0 +1,25 @@
+var clipboard = {
+	pasteBoard : null,
+	init : function() {
+		this.pasteBoard = NSPasteboard.generalPasteboard();
+	},
+	set : function( text ) {
+		if( typeof text === 'undefined' ) return null;
+
+		if( !this.pasteBoard )
+			this.init();
+
+		this.pasteBoard.declareTypes_owner( [ NSPasteboardTypeString ], null );
+		this.pasteBoard.setString_forType( text, NSPasteboardTypeString );
+
+		return true;
+	},
+	get : function() {
+		if( !this.pasteBoard )
+			this.init();
+
+		var text = this.pasteBoard.stringForType( NSPasteboardTypeString );
+
+		return text.toString();
+	}
+};

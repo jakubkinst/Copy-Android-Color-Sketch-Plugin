@@ -1,0 +1,25 @@
+{
+  "identifier" : "cz.kinst.jakub.copyandroidcolor",
+  "name" : "Copy Android Color",
+  "description" : "Copy Android-styled color value from selected layer",
+  "version" : "0.1",
+  "author" : "Jakub Kinst",
+  "authorEmail" : "jakub@kinst.cz",
+  "commands" : [
+    {
+      "script" : "script.cocoascript",
+      "name" : "Copy Current Fill",
+      "shortcut": "cmd shift c",
+      "handlers" : {
+        "run" : "onRun"
+      },
+      "identifier" : "cz.kinst.jakub.copyandroidcolor.fill"
+    }
+  ],
+  "menu" : {
+    "items" : [
+      "cz.kinst.jakub.copyandroidcolor.fill"
+    ],
+    "title" : "Copy Android Color"
+  }
+}

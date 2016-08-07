@@ -1,0 +1,35 @@
+@import 'clipboard.cocoascript'
+
+function alphaToHex(alpha) {
+  var hex = Math.round(alpha * 255).toString(16).toUpperCase()
+  return hex.length == 1 ? "0" + hex : hex
+}
+
+function getLayerColor(layer) {
+  var color
+  if (layer instanceof MSTextLayer)
+    color = layer.textColor()
+  else
+    color = layer.style().fills().firstObject().color()
+
+  var layerOpacity = layer.style().contextSettings().opacity()
+  var colorAlpha = color.alpha()
+
+  var alpha = layerOpacity * colorAlpha
+
+  return "#" + alphaToHex(alpha) +  color.hexValue()
+}
+
+function copyColor(context) {
+  var selection = context.selection
+  var layer = selection[0]
+  var hex = getLayerColor(layer)
+
+  clipboard.set(hex)
+  log("HEX color copied to clipboard: " + hex)
+  context.document.showMessage("Android color copied to clipboard: " + hex)
+}
+
+var onRun = function(context) {
+	copyColor(context)
+}
